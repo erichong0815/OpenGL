@@ -1,0 +1,34 @@
+Hey all, 
+   Just spent a while troubleshooting the makefile to get it running on my laptop, running Ubuntu 18.04. 
+   I thought I'd throw out some help to anyone else who wants to get the code working on their own Linux machine. 
+   1. Follow the instructions given. 
+ ------------------------------------------------- 
+   Download the labs-examples, unzip the file, navigate to the labs-example/CHAPTER02_CODE/LINUX_VERSIONS. 
+   Let's try to make the files... 
+   > $ make example1 
+ > g++ -I../../include example1.cpp ../../Common/InitShader.o /usr/lib64/libglut.so /usr/lib64/libGL.so.1 -lXmu /usr/lib64/libX11.so -lm -o example1 
+ > g++: error: /usr/lib64/libglut.so: No such file or directory 
+ > g++: error: /usr/lib64/libGL.so.1: No such file or directory 
+ > g++: error: /usr/lib64/libX11.so: No such file or directory 
+ > make: *** [Makefile:40: example1] Error 1 
+   Hmm, need to install some stuff. I followed the instructions here:  
+   https://medium.com/@Plimsky/how-to-install-a-opengl-environment-on-ubuntu-e3918cf5ab6c 
+   2. Try again! 
+ -------------------- 
+   > $ make example1 
+ > g++ -I../../include example1.cpp ../../Common/InitShader.o /usr/lib64/libglut.so /usr/lib64/libGL.so.1 -lXmu /usr/lib64/libX11.so -lm -o example1 
+ > g++: error: /usr/lib64/libglut.so: No such file or directory 
+ > g++: error: /usr/lib64/libGL.so.1: No such file or directory 
+ > g++: error: /usr/lib64/libX11.so: No such file or directory 
+ > make: *** [Makefile:40: example1] Error 1 
+   Hmm, same error. 
+   Let's look one step deeper, we definitely installed what was required. 
+   > $ whereis libglut.so 
+ > libglut: /usr/lib/x86_64-linux-gnu/libglut.a /usr/lib/x86_64-linux-gnu/libglut.so 
+   Ah! It looks like our lib files were installed to a different location to where the makefile is looking. We can fix that. 
+   > $ nano Makefile 
+   Find the line: 
+   LIB = /usr/lib64 
+   Change it to: 
+   LIB = /usr/lib/x86_64-linux-gnu/ 
+   This might be different on your machine! Match it to the directory you found when you ran $ whereis l
