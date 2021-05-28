@@ -8,7 +8,7 @@ To install OpenGL: sudo apt-get install cmake libx11-dev xorg-dev libglu1-mesa-d
 This project runs on Linux system
 
 Implement the project: Please follow the instructions below to compile the program scene-start:
-1. Open a terminal window and change directory (using the 'cd' command) to where scene-start.cpp is.
+1. Open a terminal window and change directory (using the 'cd' command) to where scene-start.cpp located.
 2. Type: ./setup-once Note: You only need to do this once.
 3. Type: ls -l You should see two small symbolic link files (created by Step 2 above) pointing to the actual dynamic library file.
 4. Type: make This should compile scene-start.cpp and create the executable program scene-start.
